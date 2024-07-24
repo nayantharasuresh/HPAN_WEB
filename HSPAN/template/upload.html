@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <form method="POST" enctype="multipart/form-data" action="/upload">
+        <input type="file" name="image">
+        <input type="submit" value="Upload">
+    </form>
+
+    <h1>Images in Uploads Folder</h1>
+        <div>
+            {% for filename in image_files %}
+                <div style="display:inline-block; padding: 5px;">
+                    <img src="{{ url_for('static', filename=filename['image']) }}" style="max-width: 300px; max-height: 300px; margin: 10px;">
+                     <p>Resolution: {{ filename['resulsion'] }}</p>
+                    <p>Size: {{ filename['size'] }} KB</p>
+                    <a href="/download/{{ filename['image'] }}">Download</a>
+                </div>
+            {% endfor %}
+        </div>
+</body>
+</html>
